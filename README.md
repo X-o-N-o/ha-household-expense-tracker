@@ -15,7 +15,7 @@ A comprehensive household expense tracking web application with advanced financi
 
 ### Raspberry Pi (Zero Configuration)
 ```bash
-git clone https://github.com/your-username/household-expense-tracker.git
+git clone https://github.com/X-o-N-o/ha-household-expense-tracker.git
 cd household-expense-tracker
 chmod +x npm-install-pi.sh
 ./npm-install-pi.sh
