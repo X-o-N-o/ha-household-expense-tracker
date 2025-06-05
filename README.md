@@ -31,14 +31,14 @@ A comprehensive household expense tracking web application that provides advance
 ## Configuration
 
 ```yaml
-database_url: ""  # Optional: External PostgreSQL database URL
+database_url: "postgresql://user:password@host:port/database"  # Your PostgreSQL database URL
 user1_name: "You"  # Name for first user
 user2_name: "Partner"  # Name for second user
 ```
 
 ### Configuration Options
 
-- **database_url** (optional): External PostgreSQL database connection string. If not provided, uses local SQLite database.
+- **database_url**: PostgreSQL database connection string (required)
 - **user1_name**: Display name for the first user (default: "You")
 - **user2_name**: Display name for the second user (default: "Partner")
 

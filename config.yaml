@@ -11,6 +11,12 @@ arch:
   - i386
 startup: application
 boot: auto
+build_from:
+  aarch64: "ghcr.io/home-assistant/aarch64-base:3.18"
+  amd64: "ghcr.io/home-assistant/amd64-base:3.18"
+  armhf: "ghcr.io/home-assistant/armhf-base:3.18"
+  armv7: "ghcr.io/home-assistant/armv7-base:3.18"
+  i386: "ghcr.io/home-assistant/i386-base:3.18"
 ports:
   5000/tcp: 5000
 ports_description:
@@ -20,7 +26,8 @@ options:
   user1_name: "You"
   user2_name: "Partner"
 schema:
-  database_url: "str?"
+  database_url: "str"
   user1_name: "str"
   user2_name: "str"
-image: "ghcr.io/home-assistant/{arch}-addon-household-expense-tracker"
+map:
+  - data:rw
