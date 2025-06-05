@@ -1,0 +1,26 @@
+name: "Household Expense Tracker"
+description: "A comprehensive household expense tracking web application with advanced financial management features"
+version: "1.0.0"
+slug: "household-expense-tracker"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: application
+boot: auto
+ports:
+  5000/tcp: 5000
+ports_description:
+  5000/tcp: "Web interface"
+options:
+  database_url: ""
+  user1_name: "You"
+  user2_name: "Partner"
+schema:
+  database_url: "str?"
+  user1_name: "str"
+  user2_name: "str"
+image: "ghcr.io/home-assistant/{arch}-addon-household-expense-tracker"
