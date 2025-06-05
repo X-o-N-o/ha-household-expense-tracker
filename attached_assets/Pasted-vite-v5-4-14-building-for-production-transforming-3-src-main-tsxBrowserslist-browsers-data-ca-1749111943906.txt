@@ -1,0 +1,67 @@
+vite v5.4.14 building for production...
+transforming (3) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 2994 modules transformed.
+../dist/public/index.html                              0.78 kB │ gzip:   0.47 kB
+../dist/public/assets/index-Bg01joW9.css              69.58 kB │ gzip:  11.90 kB
+../dist/public/assets/purify.es-BFmuJLeH.js           21.93 kB │ gzip:   8.59 kB
+../dist/public/assets/index.es-CsdVIrc_.js           150.02 kB │ gzip:  51.07 kB
+../dist/public/assets/html2canvas.esm-CBrSDip1.js    201.42 kB │ gzip:  47.70 kB
+../dist/public/assets/jspdf.es.min-Dzd0m5vq.js       357.71 kB │ gzip: 116.73 kB
+../dist/public/assets/index-8rnXQWax.js            1,012.74 kB │ gzip: 282.68 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1m
+
+  dist/index.js  32.1kb
+
+⚡ Done in 213ms
+Setting up database tables...
+
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/home/pi/ha-household-expense-tracker/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+Error: connect ECONNREFUSED ::1:5432
+    at /home/pi/ha-household-expense-tracker/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.query (/home/pi/ha-household-expense-tracker/node_modules/drizzle-kit/bin.cjs:66575:26)
+    at async fromDatabase2 (/home/pi/ha-household-expense-tracker/node_modules/drizzle-kit/bin.cjs:18700:25) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '::1',
+  port: 5432
+}
+
+Installation complete!
+
+To start the application:
+  ./start.sh
+
+Or run as service:
+  ./install-pi.sh
+
+Access at: http://192.168.1.99:5000
+pi@BernielsBrain:~/ha-household-expense-tracker$ sh start.sh
+node:internal/errors:491
+    ErrorCaptureStackTrace(err);
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:400:5)
+    at validateString (node:internal/validators:163:11)
+    at Object.resolve (node:path:1098:7)
+    at file:///home/pi/ha-household-expense-tracker/dist/index.js:734:17
+    at ModuleJob.run (node:internal/modules/esm/module_job:194:25) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v18.13.0
