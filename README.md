@@ -1,59 +1,93 @@
-# Household Expense Tracker - Home Assistant Add-on
+# Household Expense Tracker v2.0.0
 
-A comprehensive household expense tracking web application that provides advanced financial management through interactive and personalized features.
+A comprehensive household expense tracking web application with advanced financial management features, dark mode, and zero-configuration installation for Raspberry Pi.
 
 ## Features
 
-- **Real-time collaborative expense tracking** between two users
-- **Dynamic expense categorization system** with custom icons and colors
-- **Advanced data visualization** with charts and analytics
-- **CSV and PDF export functionality** with detailed reports
-- **Multilingual support** (German interface)
-- **Responsive design** with dark mode support
-- **Historical data preservation** for trend analysis
+- **Expense Management**: Track fixed and variable expenses with categories
+- **Split Calculations**: Automatically calculate expense splits between users
+- **Analytics Dashboard**: Visual charts and monthly trends
+- **Data Export**: CSV and PDF export with complete historical data
+- **Dark Mode**: Default dark theme with toggle option
+- **Multi-Year Tracking**: Historical expense data across multiple years
 
-## Installation
+## Quick Installation
 
-### Method 1: Add Repository (Recommended)
+### Raspberry Pi (Zero Configuration)
+```bash
+git clone https://github.com/your-username/household-expense-tracker.git
+cd household-expense-tracker
+chmod +x npm-install-pi.sh
+./npm-install-pi.sh
+```
 
-1. In Home Assistant, go to **Supervisor** → **Add-on Store**
-2. Click the three dots menu (⋮) in the top right
-3. Select **Repositories**
-4. Add this repository URL: `https://github.com/yourusername/ha-household-expense-tracker`
-5. Find "Household Expense Tracker" in the add-on store and click **Install**
+This automatically installs:
+- Node.js and PostgreSQL
+- Creates secure database with random credentials
+- Builds and starts the application
+- Sets up auto-startup service
 
-### Method 2: Manual Installation
+Access at: `http://your-pi-ip:5000`
 
-1. Copy all files to your Home Assistant `addons/household-expense-tracker/` directory
-2. Go to **Supervisor** → **Add-on Store**
-3. Find "Household Expense Tracker" and click **Install**
+### Home Assistant Addon
+1. **Add Repository**:
+   - Go to Supervisor → Add-on Store → ⋮ → Repositories
+   - Add: `https://github.com/your-username/household-expense-tracker`
+
+2. **Install**:
+   - Find "Household Expense Tracker" and install
+   - Configure database URL in addon settings
+   - Start the addon
+
+3. **Access**: `http://homeassistant.local:5000`
+
+## Installation Options
+
+- `npm-install-pi.sh` - Quick automated setup
+- `install-pi.sh` - Full installation with systemd service
+- Manual installation (see `README-RASPBERRY-PI.md`)
+- Home Assistant addon
 
 ## Configuration
 
-```yaml
-database_url: "postgresql://user:password@host:port/database"  # Your PostgreSQL database URL
-user1_name: "You"  # Name for first user
-user2_name: "Partner"  # Name for second user
+### Environment Variables
+- `DATABASE_URL` - PostgreSQL connection string
+- `PORT` - Server port (default: 5000)
+- `NODE_ENV` - Environment mode
+
+### Database
+Uses PostgreSQL with automatic schema initialization. SQLite schema also available in `shared/schema-sqlite.ts`.
+
+## Development
+
+```bash
+npm install
+npm run dev
 ```
 
-### Configuration Options
+Build for production:
+```bash
+npm run build
+npm start
+```
 
-- **database_url**: PostgreSQL database connection string (required)
-- **user1_name**: Display name for the first user (default: "You")
-- **user2_name**: Display name for the second user (default: "Partner")
+## Technology Stack
 
-## Usage
+- **Frontend**: React, TypeScript, Tailwind CSS, Shadcn/ui
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL with Drizzle ORM
+- **Charts**: Recharts
+- **Export**: jsPDF, CSV generation
 
-1. Start the add-on
-2. Access the web interface at `http://homeassistant.local:5000`
-3. Begin tracking your household expenses
-4. Use the analytics dashboard to monitor spending patterns
-5. Export reports in CSV or PDF format
+## Version 2.0.0 Highlights
 
-## Database
+- Zero-configuration Raspberry Pi installation
+- Enhanced database export with historical data
+- Dark mode as default setting
+- Home Assistant addon support
+- Automated PostgreSQL setup
+- Complete systemd service integration
 
-By default, the add-on uses a local SQLite database stored in `/data/expenses.db`. For better performance and backup capabilities, you can configure an external PostgreSQL database using the `database_url` option.
+## License
 
-## Support
-
-For issues and feature requests, please visit the [GitHub repository](https://github.com/yourusername/ha-household-expense-tracker).
+MIT License - see LICENSE file for details.

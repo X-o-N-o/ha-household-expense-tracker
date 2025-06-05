@@ -1,27 +1,47 @@
 # Changelog
 
-All notable changes to the Household Expense Tracker Home Assistant addon will be documented in this file.
+## [2.0.0] - 2025-01-05
 
-## [1.0.0] - 2025-06-04
+### 🎉 Major Features
+- **Zero-Configuration Raspberry Pi Installation**: Complete automated setup with PostgreSQL database
+- **Enhanced Database Export/Import**: Full backup including historical expenses across multiple years
+- **Home Assistant Addon Support**: Ready-to-install addon with local build configuration
+- **Dark Mode as Default**: Application now starts in dark mode by default
 
-### Added
-- Initial release of Household Expense Tracker addon
-- Real-time collaborative expense tracking between two users
-- Dynamic expense categorization with custom icons and colors
-- Advanced data visualization with charts and analytics
-- CSV and PDF export functionality with detailed reports
-- German language interface support
-- Responsive design with dark mode support
-- Historical data preservation for trend analysis
-- SQLite database support with optional PostgreSQL integration
-- Multi-architecture support (ARM, x64, etc.)
+### ✨ New Features
+- Automated PostgreSQL setup script for Raspberry Pi
+- Complete database export including historical expenses (last 5 years)
+- Enhanced CSV export with historical data and type indicators
+- Systemd service configuration for auto-startup
+- Zero-configuration installation scripts
+- Environment file management for easy deployment
 
-### Features
-- Dashboard with monthly spending overview
-- Split percentage configuration between users
-- Category management with custom colors and icons
-- Expense filtering and search capabilities
-- Monthly trend analysis
-- Export capabilities (CSV/PDF) with visual charts
-- Automatic database initialization
-- Persistent data storage in Home Assistant
+### 🔧 Improvements
+- Dark mode initialization moved to app level for consistent loading
+- Enhanced error handling in export functionality
+- Better database schema management for historical data
+- Improved installation documentation with multiple setup options
+- Streamlined build process for production deployment
+
+### 🐛 Bug Fixes
+- Fixed dark mode not loading on dashboard first visit
+- Resolved database export missing historical expenses
+- Fixed CSV export only showing current year data
+- Corrected Home Assistant addon Docker image references
+
+### 📦 Installation Options
+- `npm-install-pi.sh`: Quick setup with automatic PostgreSQL
+- `install-pi.sh`: Full installation with systemd service
+- Manual installation guide for advanced users
+- Home Assistant addon via GitHub repository
+
+### 🔒 Security
+- Automated secure database credential generation
+- Random password generation for database users
+- Proper PostgreSQL user permissions and isolation
+
+### 📚 Documentation
+- Complete Raspberry Pi installation guide
+- Zero-configuration setup instructions
+- Home Assistant addon installation guide
+- Troubleshooting and maintenance documentation
