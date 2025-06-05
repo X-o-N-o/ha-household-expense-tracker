@@ -468,10 +468,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const splitSettings = await storage.getSplitSettings();
       const categories = await storage.getCategories();
       
+      // Get all historical expenses for all years
+      const currentYear = new Date().getFullYear();
+      const years = Array.from({ length: 5 }, (_, i) => currentYear - i); // Export last 5 years
+      const allHistoricalExpenses = [];
+      
+      for (const year of years) {
+        const yearExpenses = await storage.getHistoricalExpenses(year);
+        allHistoricalExpenses.push(...yearExpenses);
+      }
+      
       const exportData = {
         expenses,
         splitSettings,
         categories,
+        historicalExpenses: allHistoricalExpenses,
         exportDate: new Date().toISOString(),
         version: "1.0.0"
       };
@@ -487,7 +498,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/database/import", async (req, res) => {
     try {
-      const { expenses, splitSettings, categories } = req.body;
+      const { expenses, splitSettings, categories, historicalExpenses } = req.body;
       
       // Clear existing data
       await storage.deleteAllExpenses();
@@ -516,6 +527,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
             isIncome: expense.isIncome,
             icon: expense.icon,
             imageUrl: expense.imageUrl
+          });
+        }
+      }
+      
+      // Import historical expenses
+      if (historicalExpenses && Array.isArray(historicalExpenses)) {
+        for (const historicalExpense of historicalExpenses) {
+          await storage.createHistoricalExpense({
+            expenseName: historicalExpense.expenseName,
+            year: historicalExpense.year,
+            amount: historicalExpense.amount,
+            frequency: historicalExpense.frequency,
+            category: historicalExpense.category
           });
         }
       }
