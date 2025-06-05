@@ -70,13 +70,20 @@ sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;"
 sudo -u postgres psql -c "ALTER USER $DB_USER CREATEDB;"
 
-# Set database URL
+# Set database URL with IPv4 explicitly
 export DATABASE_URL="postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME"
 
 # Save to environment file
 echo "DATABASE_URL=$DATABASE_URL" > .env
 echo "NODE_ENV=production" >> .env
 echo "PORT=5000" >> .env
+
+# Force IPv4 for PostgreSQL connections
+echo "PGHOST=127.0.0.1" >> .env
+echo "PGPORT=5432" >> .env
+echo "PGUSER=$DB_USER" >> .env
+echo "PGPASSWORD=$DB_PASS" >> .env
+echo "PGDATABASE=$DB_NAME" >> .env
 
 echo "Database URL: $DATABASE_URL"
 

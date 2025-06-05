@@ -42,13 +42,18 @@ echo "local all all md5" | sudo tee -a /etc/postgresql/*/main/pg_hba.conf
 sudo systemctl restart postgresql
 sleep 3
 
-# Set database URL
-export DATABASE_URL="postgresql://$DB_USER:$DB_PASS@localhost:5432/$DB_NAME"
+# Set database URL with IPv4 explicitly to avoid ::1 connection issues
+export DATABASE_URL="postgresql://$DB_USER:$DB_PASS@127.0.0.1:5432/$DB_NAME"
 
-# Save to environment file
+# Save to environment file with all necessary variables
 echo "DATABASE_URL=$DATABASE_URL" > .env
 echo "NODE_ENV=production" >> .env
 echo "PORT=5000" >> .env
+echo "PGHOST=127.0.0.1" >> .env
+echo "PGPORT=5432" >> .env
+echo "PGUSER=$DB_USER" >> .env
+echo "PGPASSWORD=$DB_PASS" >> .env
+echo "PGDATABASE=$DB_NAME" >> .env
 
 echo "Database configured: $DATABASE_URL"
 
