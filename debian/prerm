@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+# Pre-removal script for household-expense-tracker
+echo "Stopping Household Expense Tracker service..."
+
+# Stop the service
+systemctl stop household-expense-tracker || true
+systemctl disable household-expense-tracker || true
+
+exit 0

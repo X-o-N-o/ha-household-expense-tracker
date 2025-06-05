@@ -1,0 +1,11 @@
+household-expense-tracker (2.0.0-1) unstable; urgency=medium
+
+  * Initial Debian package release
+  * Complete household expense tracking application
+  * Automated PostgreSQL database setup
+  * Dark mode as default theme
+  * Enhanced data export with historical data
+  * Zero-configuration installation
+  * Systemd service integration
+
+ -- Your Name <your.email@example.com>  Thu, 05 Jun 2025 11:18:00 +0000

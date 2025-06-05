@@ -45,3 +45,12 @@
 - Zero-configuration setup instructions
 - Home Assistant addon installation guide
 - Troubleshooting and maintenance documentation
+- APT package installation with Debian packaging
+- Professional deployment and service management
+
+### 📦 APT Package Installation (New)
+- Professional Debian package (.deb) creation
+- Automated PostgreSQL configuration during installation
+- Systemd service integration with proper permissions
+- Clean removal and purge options
+- Dependency management through APT system

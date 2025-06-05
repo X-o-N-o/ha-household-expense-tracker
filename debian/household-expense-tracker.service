@@ -1,0 +1,29 @@
+[Unit]
+Description=Household Expense Tracker Web Application
+Documentation=https://github.com/your-username/household-expense-tracker
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=expense-tracker
+Group=expense-tracker
+WorkingDirectory=/opt/household-expense-tracker
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/household-expense-tracker/.env
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=household-expense-tracker
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/household-expense-tracker
+
+[Install]
+WantedBy=multi-user.target

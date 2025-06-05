@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+# Post-removal script for household-expense-tracker
+case "$1" in
+    remove|abort-install|abort-upgrade|disappear)
+        # Remove systemd service file
+        rm -f /etc/systemd/system/household-expense-tracker.service
+        systemctl daemon-reload
+        ;;
+    purge)
+        # Remove application directory and user data
+        rm -rf /opt/household-expense-tracker
+        
+        # Remove system user
+        if id "expense-tracker" &>/dev/null; then
+            userdel expense-tracker
+        fi
+        
+        # Ask about database removal
+        echo "Note: PostgreSQL database 'expense_tracker' and user 'expense_user' were not removed."
+        echo "To remove them manually:"
+        echo "  sudo -u postgres psql -c \"DROP DATABASE expense_tracker;\""
+        echo "  sudo -u postgres psql -c \"DROP USER expense_user;\""
+        ;;
+esac
+
+exit 0

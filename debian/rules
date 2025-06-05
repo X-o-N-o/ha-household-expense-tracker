@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	npm install
+	npm run build
+
+override_dh_auto_install:
+	dh_auto_install
+	# Install systemd service
+	install -D -m 644 debian/household-expense-tracker.service debian/household-expense-tracker/etc/systemd/system/household-expense-tracker.service
+
+override_dh_fixperms:
+	dh_fixperms
+	# Make scripts executable
+	chmod +x debian/household-expense-tracker/opt/household-expense-tracker/start-expense-tracker.sh || true

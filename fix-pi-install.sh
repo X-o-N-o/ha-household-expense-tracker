@@ -3,8 +3,11 @@
 # Fix for Raspberry Pi installation issues
 echo "Fixing Raspberry Pi installation..."
 
-# Stop any running services
+# Stop any running PostgreSQL services
+echo "Stopping existing PostgreSQL services..."
 sudo systemctl stop postgresql 2>/dev/null || true
+sudo systemctl stop postgresql@*.service 2>/dev/null || true
+sudo service postgresql stop 2>/dev/null || true
 
 # Reconfigure PostgreSQL for local connections
 echo "Configuring PostgreSQL..."
@@ -36,10 +39,30 @@ host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
 EOF
 
-# Start PostgreSQL
+# Install PostgreSQL if not present
+if ! command -v psql &> /dev/null; then
+    echo "PostgreSQL not found. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y postgresql postgresql-contrib
+fi
+
+# Start PostgreSQL with multiple fallback methods
 echo "Starting PostgreSQL..."
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
+if systemctl list-unit-files | grep -q "postgresql.service"; then
+    sudo systemctl start postgresql
+    sudo systemctl enable postgresql
+elif systemctl list-unit-files | grep -q "postgresql@"; then
+    # Handle versioned PostgreSQL service
+    PG_VERSION=$(ls /etc/postgresql/ 2>/dev/null | head -1)
+    if [ -n "$PG_VERSION" ]; then
+        sudo systemctl start postgresql@$PG_VERSION-main
+        sudo systemctl enable postgresql@$PG_VERSION-main
+    fi
+else
+    echo "Using service command as fallback..."
+    sudo service postgresql start
+    sudo update-rc.d postgresql enable
+fi
 
 # Wait for PostgreSQL to be ready
 sleep 5

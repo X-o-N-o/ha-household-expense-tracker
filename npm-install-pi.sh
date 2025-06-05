@@ -15,11 +15,36 @@ fi
 
 # Install PostgreSQL
 echo "Installing PostgreSQL..."
+sudo apt-get update
 sudo apt-get install -y postgresql postgresql-contrib
 
-# Start PostgreSQL
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
+# Wait for installation to complete
+sleep 2
+
+# Find and start PostgreSQL service
+echo "Starting PostgreSQL service..."
+if systemctl list-unit-files | grep -q "postgresql.service"; then
+    sudo systemctl start postgresql
+    sudo systemctl enable postgresql
+elif systemctl list-unit-files | grep -q "postgresql@"; then
+    # Handle versioned PostgreSQL service
+    PG_VERSION=$(ls /etc/postgresql/ 2>/dev/null | head -1)
+    sudo systemctl start postgresql@$PG_VERSION-main
+    sudo systemctl enable postgresql@$PG_VERSION-main
+else
+    echo "PostgreSQL service not found, trying alternative method..."
+    sudo service postgresql start
+fi
+
+# Verify PostgreSQL is running
+sleep 3
+if pgrep -x "postgres" > /dev/null; then
+    echo "PostgreSQL is running"
+else
+    echo "Warning: PostgreSQL may not have started properly"
+    echo "Attempting to start manually..."
+    sudo -u postgres /usr/lib/postgresql/*/bin/pg_ctl start -D /var/lib/postgresql/*/main/
+fi
 
 # Setup database automatically
 echo "Configuring database..."

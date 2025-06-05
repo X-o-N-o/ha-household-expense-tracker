@@ -1,0 +1,22 @@
+Package: household-expense-tracker
+Version: 2.0.0
+Section: web
+Priority: optional
+Architecture: all
+Depends: nodejs (>= 18.0.0), postgresql (>= 12.0), postgresql-contrib
+Maintainer: Your Name <your.email@example.com>
+Description: Household Expense Tracker Web Application
+ A comprehensive household expense tracking web application with advanced
+ financial management features, dark mode, and zero-configuration setup.
+ .
+ Features:
+  - Expense management with categories
+  - Split calculations between users
+  - Analytics dashboard with charts
+  - Data export (CSV/PDF)
+  - Dark mode interface
+  - Multi-year tracking
+ .
+ This package automatically configures PostgreSQL database and starts
+ the web service on port 5000.
+Homepage: https://github.com/your-username/household-expense-tracker

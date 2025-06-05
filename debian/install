@@ -1,0 +1,13 @@
+client/* opt/household-expense-tracker/client/
+server/* opt/household-expense-tracker/server/
+shared/* opt/household-expense-tracker/shared/
+package.json opt/household-expense-tracker/
+package-lock.json opt/household-expense-tracker/
+tsconfig.json opt/household-expense-tracker/
+vite.config.ts opt/household-expense-tracker/
+tailwind.config.ts opt/household-expense-tracker/
+postcss.config.js opt/household-expense-tracker/
+components.json opt/household-expense-tracker/
+drizzle.config.ts opt/household-expense-tracker/
+README.md opt/household-expense-tracker/
+CHANGELOG.md opt/household-expense-tracker/

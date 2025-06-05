@@ -13,21 +13,31 @@ A comprehensive household expense tracking web application with advanced financi
 
 ## Quick Installation
 
+### APT Installation (Empfohlen)
+```bash
+# Lokale Installation
+git clone https://github.com/your-username/household-expense-tracker.git
+cd household-expense-tracker
+./build-deb-package.sh
+sudo dpkg -i ../household-expense-tracker_*.deb
+sudo apt-get install -f
+```
+
 ### Raspberry Pi (Zero Configuration)
 ```bash
 git clone https://github.com/your-username/household-expense-tracker.git
 cd household-expense-tracker
-chmod +x npm-install-pi.sh
-./npm-install-pi.sh
+chmod +x quick-install-pi.sh
+./quick-install-pi.sh
 ```
 
-This automatically installs:
-- Node.js and PostgreSQL
-- Creates secure database with random credentials
-- Builds and starts the application
-- Sets up auto-startup service
+Beide Methoden installieren automatisch:
+- Node.js und PostgreSQL
+- Sichere Datenbankzugangsdaten
+- Systemd Service
+- Automatischer Start
 
-Access at: `http://your-pi-ip:5000`
+Zugriff: `http://your-pi-ip:5000`
 
 ### Home Assistant Addon
 1. **Add Repository**:
@@ -43,10 +53,12 @@ Access at: `http://your-pi-ip:5000`
 
 ## Installation Options
 
-- `npm-install-pi.sh` - Quick automated setup
-- `install-pi.sh` - Full installation with systemd service
-- Manual installation (see `README-RASPBERRY-PI.md`)
-- Home Assistant addon
+- **APT Package** - `./build-deb-package.sh` (Empfohlen)
+- **Quick Setup** - `./quick-install-pi.sh` 
+- **Manual Setup** - `./npm-install-pi.sh`
+- **Service Install** - `./install-pi.sh`
+- **Home Assistant** - Addon über Repository
+- **Troubleshooting** - `./diagnostic-pi.sh`
 
 ## Configuration
 
